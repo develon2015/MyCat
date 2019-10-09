@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<meta charset="UTF-8">
+<title>登录</title>
+<!-- 外部CSS样式代码 -->
+<link rel="stylesheet" href="../css/base.css">
+
+<body>
+    <div id='header' class="title bold">
+        <text>用户登录</text>
+        <span><a href="../index.html">返回首页</a></span>
+    </div>
+    <div id='main'>
+        <ol>
+            <li> <a href='' value="../image/ak1.jpg" onclick="return a(this)">ak1</a> </li>
+            <li> <a href='' value="../image/ak2.jpg" onclick="return a(this)">ak1</a> </li>
+            <li> <a href='' value="../image/ak3.jpg" onclick="return a(this)">ak1</a> </li>
+            <li> <a href='' value="../image/ak4.jpg" onclick="return a(this)">ak1</a> </li>
+        </ol>
+
+        <img id='jyoyuu' style='height: 200px' src='../image/ak8.jpg'>
+    </div>
+    <div id="footer"></div>
+</body>
+
+<script src="../js/librt.js" type="text/javascript"></script>
+
+<script>
+    function a(it) {
+        var src = it.getAttribute('value')
+        get('jyoyuu').setAttribute('src', src)
+        return false;
+    }
+</script>
+
+<script>
+</script>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<meta charset="UTF-8">
+<title>测试</title>
+<script src="js/loadbar.js"></script>
+<link href="css/base.css" rel="stylesheet">
+<script src="js/jquery-3.4.1.js"></script>
+<script src="js/libjrt2.js"></script>
+
+<script>
+    function test() {
+        Develon.notify(document.forms.notify.msg.value, fun =>{
+            log(document.forms.notify.msg.value)
+        })
+    }
+
+    $(fun =>{
+    })
+</script>
+
+<body>
+    <div class="title bold">测试页面</div>
+    <div style="padding: 10px 0" class="center">
+        <form id="notify" action="javascript: test();">
+            <input name="msg">
+            <span class="button" onclick="test()">OK</span>
+        </form>
+    </div>
+    <div id="log"></div>
+</body>
+
+</html>
