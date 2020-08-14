@@ -23,9 +23,9 @@ class Shell(val shell: String = "bash") {
 	fun run(cmd: String, timeout: Long = 1000, loopWaitTime: Long = 100): String? {
 		var result = ""
 		val startTime = System.currentTimeMillis()
-		val outs = process.getOutputStream()
-		val ins = process.getInputStream()
-		val errs = process.getErrorStream()
+		val outs = process.outputStream
+		val ins = process.inputStream
+		val errs = process.errorStream
 		
 		while (ins.available() > 0 || errs.available() > 0) {
 			ins.available().toLong().let{ if (it > 0) ins.skip(it) }
@@ -56,18 +56,19 @@ class Shell(val shell: String = "bash") {
 	}
 	
 	/** 启动 shell 进程 */
-	fun ready() {
+	fun ready(): Shell {
 		process = Runtime.getRuntime().exec(shell)
-		pid = run("echo -n $$", 2000, 100).let{ if (it != null) it.toInt() else 0 }
+		pid = run("echo -n $$", 2000, 100).let{ it?.toInt() ?: 0 }
+        return this
 	}
 	
 	/** 测试 Shell 可用性 */
 	fun isAlive(): Boolean = try { "SHELL".equals(run("echo -n 'SHELL'")) } catch(e: Throwable) { false }
 	
-	/** 获取上一个命令退出码, 毋使惊异常(-1) */
+	/** 获取上一个命令退出码, 异常(-1) */
 	fun lastCode(): Int = try { run("echo -n $?", 100, 0)?.toInt() ?: -1 } catch(e: Throwable) { -1 }
 	
-	/** 发送 exit 指令, 毋使惊异常 */
+	/** 发送 exit 指令 */
 	fun exit() {
 		try { run("exit") } catch(e: Throwable) {}
 	}
